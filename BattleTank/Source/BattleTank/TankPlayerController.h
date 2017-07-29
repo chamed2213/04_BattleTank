@@ -7,6 +7,7 @@
 #include "GameFramework/Pawn.h"
 #include "BattleTank/Tank.h"
 
+
 #include "TankPlayerController.generated.h"
 
 
@@ -19,5 +20,8 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 protected: 
 	ATank* GetControlledTank() const;
 	void BeginPlay() override;
-	
+	void Tick(float DeltaTime) override;
+	//This Will make the tank move the barrel towards the crosshair
+	void AimTowardsCrosshair();
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 };
