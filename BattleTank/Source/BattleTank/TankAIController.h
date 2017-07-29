@@ -22,6 +22,6 @@ protected:
 	ATank* GetControlledTank() const;
 	void BeginPlay() override;
 	ATank* GetPlayerTank();
-	
+	void Tick(float DeltaTime) override;
 	
 };
