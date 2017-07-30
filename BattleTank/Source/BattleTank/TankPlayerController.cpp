@@ -23,12 +23,12 @@ void ATankPlayerController::Tick(float DeltaTime)
 	
 }
 
-void ATankPlayerController::AimTowardsCrosshair() 
+void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
-	
+
 	FVector HitLocation; //Out Parameters
-	
+
 	if (GetSightRayHitLocation(HitLocation)) // is going to line trace
 	{
 		GetControlledTank()->AimAt(HitLocation);
@@ -48,7 +48,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	{
 		GetVectorHitLocation(LookDirection, OutHitLocation);
 	}
-	
+
 	//LineTrace along that LookDirection, and see what we hit(up to max range)
 	return true;
 }
@@ -58,9 +58,9 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 	FVector CameraWorldLocation;//To be Discarded
 	return DeprojectScreenPositionToWorld
 	(
-		ScreenLocation.X, 
-		ScreenLocation.Y, 
-		CameraWorldLocation, 
+		ScreenLocation.X,
+		ScreenLocation.Y,
+		CameraWorldLocation,
 		LookDirection
 	);
 }
@@ -70,7 +70,7 @@ bool ATankPlayerController::GetVectorHitLocation(FVector LookDirection, FVector&
 	auto StartLocation = PlayerCameraManager->GetCameraLocation();
 	auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
 	if (GetWorld()->LineTraceSingleByChannel
-		(HitResult,
+	(HitResult,
 		StartLocation,
 		EndLocation,
 		ECollisionChannel::ECC_Visibility)

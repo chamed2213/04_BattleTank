@@ -24,15 +24,18 @@ protected:
 	//This Will make the tank move the barrel towards the crosshair
 	void AimTowardsCrosshair();
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
-	
+
 	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
 	bool GetVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
+
+
 public:
 	UPROPERTY(EditAnywhere)
-	float CrossHairXLocation = 0.5f;
+		float CrossHairXLocation = 0.5f;
 	UPROPERTY(EditAnywhere)
-	float CrossHairYLocation = 0.3333f;
+		float CrossHairYLocation = 0.3333f;
 	UPROPERTY(EditAnywhere)
 		float LineTraceRange = 1000000.f;
+
 
 };
