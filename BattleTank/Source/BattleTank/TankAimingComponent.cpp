@@ -13,8 +13,6 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-
-
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
 {
@@ -24,7 +22,6 @@ void UTankAimingComponent::BeginPlay()
 	// ...
 	
 }
-
 
 // Called every frame
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -47,12 +44,23 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
-		ESuggestProjVelocityTraceOption::TraceFullPath
+		false,
+		0.f,
+		0.f,
+		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 	if (bHaveAimSolution)		
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
+		auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: Aim Solution Found"), Time);
+
+	}
+	else
+	{
+		auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: No aim solve found"), Time);
 	}
 }
 
