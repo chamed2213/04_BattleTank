@@ -1,6 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "BattleTank/TankBarrel.h"
+#include "BattleTank/Tank.h"
+#include "BattleTank/TankTurret.h"
+#include "Kismet/GameplayStatics.h"
+
 
 
 // Sets default values for this component's properties
@@ -69,6 +74,10 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 	Barrel = BarrelToSet;
 }
 
+void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
+{
+	Turret = TurretToSet;
+}
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	//Work out difference between current barrel rotation, and AimDirection
@@ -76,5 +85,14 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotation; 
 	
-	Barrel->Elevate(5); // TODO remove magic number
+	Barrel->Elevate(DeltaRotator.Pitch);
+}
+
+void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
+{
+	auto TurretRotation = Turret->GetForwardVector.Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - TurretRotation;
+
+	Turret->Rotate(DeltaRotator.Roll);
 }

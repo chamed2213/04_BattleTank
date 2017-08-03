@@ -6,10 +6,10 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/Pawn.h"
 #include "Engine/World.h"
-#include "BattleTank/Tank.h"
+
 #include "TankPlayerController.generated.h"
 
-
+class ATank;
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {

@@ -4,13 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "BattleTank/Tank.h"
 #include "Components/StaticMeshComponent.h"
-#include "Kismet/GameplayStatics.h"
-#include "BattleTank/TankBarrel.h"
+
 #include "TankAimingComponent.generated.h"
 
 class UTankBarrel;
+class UTankTurret;
 
 UCLASS( ClassGroup=(Component), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
@@ -24,9 +23,14 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	//Aim at Reticle
 	void AimAt(FVector HitLocation, float LaunchSpeed);
+	//Set Turret Static Mesh
+	void SetTurretReference(UTankTurret * TurretToSet);
 	//Set Barrel as a StaticMesh
 	void SetBarrelReference(UTankBarrel * BarrelToSet);
+	//Move Turret on the Azimuth towards the Reticle
 	void MoveBarrelTowards(FVector AimDirection);
+	//MoveTurret on Elevation towards the Reticle
+	void MoveTurretTowards(FVector AimDirection);
 
 protected:
 	// Called when the game starts
@@ -35,4 +39,5 @@ protected:
 
 private:
 	UTankBarrel * Barrel = nullptr;
+	UTankTurret * Turret = nullptr;
 };

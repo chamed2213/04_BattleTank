@@ -6,7 +6,10 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+//Forward Declarations
 class UTankBarrel;
+class UTankAimingCompoenent;
+class UTankTurret;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -31,6 +34,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetBarrelReference(UTankBarrel * BarrelToSet );
+	UFUNCTION(BlueprintCallable)
+	void SetTurretReference(UTankTurret * TurretToSet);
 	//Tank Projectile LaunchSpeed
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 100000;

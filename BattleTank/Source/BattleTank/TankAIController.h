@@ -6,13 +6,12 @@
 #include "AIController.h"
 #include "GameFramework/Pawn.h"
 #include "Engine/World.h"
-#include "BattleTank/Tank.h"
 
 #include "TankAIController.generated.h"
 
-/**
- * 
- */
+//Forward Declarations
+class ATank;
+
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
