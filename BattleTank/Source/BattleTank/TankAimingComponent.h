@@ -27,10 +27,9 @@ public:
 	void SetTurretReference(UTankTurret * TurretToSet);
 	//Set Barrel as a StaticMesh
 	void SetBarrelReference(UTankBarrel * BarrelToSet);
-	//Move Turret on the Azimuth towards the Reticle
-	void MoveBarrelTowards(FVector AimDirection);
-	//MoveTurret on Elevation towards the Reticle
-	void MoveTurretTowards(FVector AimDirection);
+	//Move Turret on the towards the Reticle
+	void MoveTowards(FVector AimDirection);
+	
 
 protected:
 	// Called when the game starts
