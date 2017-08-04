@@ -32,10 +32,13 @@ public:
 	
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel * BarrelToSet );
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret * TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = Input)
+		void Fire();
+	
 	//Tank Projectile LaunchSpeed
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 100000;
