@@ -5,37 +5,28 @@
 
 
 
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto ControlledTank = GetPawn();
-	UE_LOG(LogTemp, Error, TEXT("Possesing: %s"), *ControlledTank->GetName());
+	}
 
-}
-
-ATank* ATankAIController::GetPlayerTank()
-{
-	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-	if (!PlayerPawn) { return nullptr; }
-	return Cast<ATank>(PlayerPawn);
-}
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (GetPlayerTank())
+	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto ControlledTank = Cast<ATank>(GetPawn());
+
+	if (PlayerTank)
 	{
 		//TODO Move towards the player 
 
 		//Aim at player
-		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
 		//Fire when ready
+		ControlledTank->Fire();
 	}
 }

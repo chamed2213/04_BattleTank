@@ -10,7 +10,9 @@
 class UTankBarrel;
 class UTankAimingCompoenent;
 class UTankTurret;
+class UTrack;
 class AProjectile;
+
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -37,15 +39,25 @@ public:
 	void SetBarrelReference(UTankBarrel * BarrelToSet );
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret * TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTrack_RReference(UTrack * Track_RToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTrack_LReference(UTrack * Track_LToSet);
 	UFUNCTION(BlueprintCallable, Category = Input)
 		void Fire();
 	
 	//Tank Projectile LaunchSpeed
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float LaunchSpeed = 100000;
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileBlueprint;
-	
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float  ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0;
+
 	//Local barrel reference for spawning projectile
 		UTankBarrel* Barrel = nullptr;
+		
+	
 };
